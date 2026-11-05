@@ -2,7 +2,7 @@
 
 ## Overview
 
-Plantbook is a static web app hosted at **plantbook.pod.brussels** where people can request seed trays (egg cartons) and track plant growth over time. All content lives as markdown files in a git repo. The site is statically generated with Next.js on Vercel. Dynamic actions (form submissions, image uploads) go through Next.js server actions that commit directly to the GitHub repo via the GitHub API, triggering a Vercel rebuild.
+Plantbook is a static web app hosted at **plantbook-v1.pod.brussels** where people can request seed trays (egg cartons) and track plant growth over time. All content lives as markdown files in a git repo. The site is statically generated with Next.js on Vercel. Dynamic actions (form submissions, image uploads) go through Next.js server actions that commit directly to the GitHub repo via the GitHub API, triggering a Vercel rebuild.
 
 **The repo is public.** All sensitive data (emails, secrets) must be encrypted before being committed.
 
@@ -87,7 +87,7 @@ The CLI:
 
 1. Reads `content/trays/042/index.md` from local git checkout
 2. Decrypts `seeder_secret` using `SEEDER_ENCRYPTION_KEY` (from `.env.local` or env var)
-3. Either prints the secret or opens `plantbook.pod.brussels/trays/42?secret=<decrypted>` in the browser
+3. Either prints the secret or opens `plantbook-v1.pod.brussels/trays/42?secret=<decrypted>` in the browser
 
 ### Secret Validation Flow (server action)
 
@@ -104,7 +104,7 @@ When the seeder visits a tray page with the seeder secret in the URL:
 
 - The page shows the normal tray view + update form
 - **Additionally**, a "Print QR Code" button appears
-- The QR code contains: `https://plantbook.pod.brussels/trays/{number}?secret={nurturer_secret}`
+- The QR code contains: `https://plantbook-v1.pod.brussels/trays/{number}?secret={nurturer_secret}`
 - To generate this: the server action decrypts the nurturer_secret (using `SERVER_ENCRYPTION_KEY`) and returns it to the authenticated seeder so the QR code can be rendered client-side
 - The seeder prints this QR code and sticks it on the physical egg carton before handing it to the nurturer
 
@@ -261,7 +261,7 @@ The nurturer uses this page. No secrets are displayed after submission.
 - **Testing**: Jest + React Testing Library
 - **Code Formatting**: Prettier
 - **Deployment**: Vercel (auto-deploy on push to main)
-- **Domain**: plantbook.pod.brussels
+- **Domain**: plantbook-v1.pod.brussels
 
 ### Why `next-mdx-remote/rsc` instead of `@next/mdx` for content?
 
@@ -375,7 +375,7 @@ All work should be done in small, focused PRs that are easy to review.
 30. Loading states for form submissions
 31. Meta tags / OpenGraph for tray sharing
 32. Set up Vercel project and environment variables
-33. Configure custom domain (plantbook.pod.brussels)
+33. Configure custom domain (plantbook-v1.pod.brussels)
 34. Honeypot or basic spam protection on forms
 
 ---
